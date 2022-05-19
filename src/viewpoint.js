@@ -24,7 +24,7 @@ class viewpoint {
         this.offsetX = 0;
         this.offsetY = 0;
         if (this.clickedPossibility)
-            clicked(mouseX, mouseY);
+            clicked(mouseX - this.xloc, mouseY - this.yloc);
         this.clickedPossibility = false
     }
 
