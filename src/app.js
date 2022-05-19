@@ -10,6 +10,7 @@ function setup() {
     testObjX = width/2;
     testObjY = height/2;
     vp = new viewpoint();
+    c = new creature()
 }
 
 function windowResized() {
@@ -33,7 +34,7 @@ function draw() {
     push();
     vp.moveViewpoint();
 
-    ellipse(testObjX, testObjY, 40, 40);
+    c.draw();
     pop();
 
     // Draw crosshair in middle of screen
@@ -44,5 +45,12 @@ function draw() {
 
 function clicked(xpos, ypos) {
     console.log(xpos + ", " + ypos);
+    console.log(c.inHitbox(xpos, ypos));
+
+    if (c.inHitbox(xpos, ypos)) {
+        c.setColor(color(0, 255, 0));
+    } else {
+        c.setColor(color(255, 255, 255));
+    }
 }
 
