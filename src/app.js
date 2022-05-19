@@ -42,6 +42,10 @@ function draw() {
     line(width/2-5, height/2, width/2+5, height/2);
     line(width/2, height/2-5, width/2, height/2+5);
 }
+
+function clicked(xpos, ypos) {
+    console.log(xpos + ", " + ypos);
+}
 class viewpoint {
 
     constructor(xloc=0, yloc=0, zoom=1) {
@@ -51,9 +55,12 @@ class viewpoint {
         this.offsetY = 0;
         this.zoom = zoom;
         this.dragActive = false;
+        this.clickedPossibility = false;
     }
 
     pressed() {
+        if (mouseX - this.offsetX != 0 || mouseY - this.offsetY != 0)
+            this.clickedPossibility = false;
         this.xloc += mouseX - this.offsetX;
         this.yloc += mouseY - this.offsetY;
         this.offsetX = mouseX;
@@ -64,6 +71,9 @@ class viewpoint {
         this.dragActive = false;
         this.offsetX = 0;
         this.offsetY = 0;
+        if (this.clickedPossibility)
+            clicked(mouseX, mouseY);
+        this.clickedPossibility = false
     }
 
     moveViewpoint() {
@@ -71,6 +81,7 @@ class viewpoint {
             if (!this.dragActive) {
                 this.offsetX = mouseX;
                 this.offsetY = mouseY;
+                this.clickedPossibility = true
                 this.dragActive = true;
             }
             this.pressed();
