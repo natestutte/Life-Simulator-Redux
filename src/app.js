@@ -6,9 +6,6 @@ var vp;
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background('#fae');
-    
-    testObjX = width/2;
-    testObjY = height/2;
     vp = new viewpoint();
     c = new creature()
 }
