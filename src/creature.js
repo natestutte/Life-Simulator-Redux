@@ -3,7 +3,8 @@ class creature {
     constructor(xloc=0, yloc=0, size=40) {
         this.pos = createVector(xloc, yloc);
         this.size = size;
-        this.color = color(255, 255, 255)
+        this.color = color(255, 255, 255);
+        this.activeSelect = false;
     }
 
     getPosition() {
@@ -21,5 +22,9 @@ class creature {
 
     setColor(c) {
         this.color = c;
+    }
+
+    setActive(toggle) {
+        this.activeSelect = toggle;
     }
 }
