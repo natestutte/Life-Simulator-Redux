@@ -5,6 +5,11 @@ class creature {
         this.size = size;
         this.color = color(255, 255, 255);
         this.activeSelect = false;
+
+        this.accx = 0;
+        this.accy = 0;
+        this.velx = 0;
+        this.vely = 0;
     }
 
     getPosition() {

@@ -3,6 +3,8 @@ class viewpoint {
     constructor(xloc=0, yloc=0, zoom=1) {
         this.xloc = xloc;
         this.yloc = yloc;
+        this.relativeXloc = 0;
+        this.relativeYloc = 0;
         this.offsetX = 0;
         this.offsetY = 0;
         this.zoom = zoom;
@@ -15,6 +17,8 @@ class viewpoint {
             this.clickedPossibility = false;
         this.xloc += mouseX - this.offsetX;
         this.yloc += mouseY - this.offsetY;
+        this.relativeXloc -= mouseX - this.offsetX;
+        this.relativeYloc += mouseY - this.offsetY;
         this.offsetX = mouseX;
         this.offsetY = mouseY;
     }
@@ -40,10 +44,37 @@ class viewpoint {
         } else {
             this.released();
         }
+        translate(width / 2, height / 2);
+        scale(this.zoom);
+        translate(-width / 2, -height / 2);
+
         translate(this.xloc, this.yloc);
     }
 
     getViewpointLoc() {
         return createVector(this.xloc, this.yloc);
+    }
+
+    getRelativeViewpointLoc() {
+        return createVector(this.relativeXloc, this.relativeYloc);
+    }
+
+    getZoom() {
+        return this.zoom;
+    }
+
+    setZoom(delta) {
+        if (delta > 0) {
+            this.zoom += 0.05;
+        } else if (delta < 0) {
+            this.zoom -= 0.05;
+        }
+
+        if (this.zoom > 5.0) {
+            this.zoom = 5.0;
+        } else if (this.zoom < 0.5) {
+            this.zoom = 0.5;
+        }
+        console.log(this.zoom);
     }
 }
