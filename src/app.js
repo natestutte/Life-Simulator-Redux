@@ -42,7 +42,7 @@ function draw() {
     line(width/2, height/2-5, width/2, height/2+5);
 }
 
-function clicked(xpos, ypos) {
+function clicked() {
     vpmloc = vp.getRelativeMousePosition();
 
     if (c1.inHitbox(vpmloc.x, vpmloc.y)) {
