@@ -15,10 +15,10 @@ class viewpoint {
     pressed() {
         if (mouseX - this.offsetX != 0 || mouseY - this.offsetY != 0)
             this.clickedPossibility = false;
-        this.xloc += mouseX - this.offsetX;
-        this.yloc += mouseY - this.offsetY;
-        this.relativeXloc -= mouseX - this.offsetX;
-        this.relativeYloc += mouseY - this.offsetY;
+        this.xloc += (mouseX - this.offsetX) / this.zoom;
+        this.yloc += (mouseY - this.offsetY) / this.zoom;
+        this.relativeXloc -= (mouseX - this.offsetX) / this.zoom;
+        this.relativeYloc += (mouseY - this.offsetY) / this.zoom;
         this.offsetX = mouseX;
         this.offsetY = mouseY;
     }
@@ -57,6 +57,12 @@ class viewpoint {
 
     getRelativeViewpointLoc() {
         return createVector(this.relativeXloc, this.relativeYloc);
+    }
+
+    getRelativeMousePosition() {
+        const mouseXRelativeToView = ((mouseX - width / 2) / this.zoom) + this.relativeXloc;
+        const mouseYRelativeToView = ((mouseY - height / 2) / this.zoom) - this.relativeYloc;
+        return createVector(mouseXRelativeToView, mouseYRelativeToView);
     }
 
     getZoom() {

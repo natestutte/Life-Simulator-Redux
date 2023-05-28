@@ -34,7 +34,7 @@ function draw() {
     // Draw debug stats on topleft
     textSize(14);
     vploc = vp.getRelativeViewpointLoc();
-    text(vploc.x + ", " + vploc.y, 20, 30);
+    text(Math.floor(vploc.x) + ", " + Math.floor(vploc.y), 20, 30);
 
     // Draw crosshair in middle of screen
     strokeWeight(2)
@@ -43,27 +43,20 @@ function draw() {
 }
 
 function clicked(xpos, ypos) {
-    vploc = vp.getRelativeViewpointLoc();
-    vpzoom = vp.getZoom();
-    // console.log(xpos + ", " + ypos);
+    vpmloc = vp.getRelativeMousePosition();
 
-    // clickx = (xpos / vpzoom);
-    // clicky = (ypos / vpzoom);
-
-    // console.log(clickx + ", " + clicky);
-
-    if (c1.inHitbox(xpos, ypos)) {
+    if (c1.inHitbox(vpmloc.x, vpmloc.y)) {
         c1.setColor(color(0, 0, 255));
     } else {
         c1.setColor(color(255, 255, 255));
-    } if (c2.inHitbox(xpos, ypos)) {
+    } if (c2.inHitbox(vpmloc.x, vpmloc.y)) {
         c2.setColor(color(0, 255, 0));
     } else {
         c2.setColor(color(255, 255, 255));
     }
 }
-// Commented out because coordinates don't work rn :(
-// function mouseWheel(event) {
-//     vp.setZoom(event.delta);
-// }
+
+function mouseWheel(event) {
+    vp.setZoom(event.delta);
+}
 
