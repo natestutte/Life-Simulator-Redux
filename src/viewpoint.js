@@ -1,10 +1,10 @@
 class viewpoint {
 
-    constructor(xloc=0, yloc=0, zoom=1) {
-        this.xloc = xloc;
-        this.yloc = yloc;
-        this.relativeXloc = 0;
-        this.relativeYloc = 0;
+    constructor(xLoc=0, yLoc=0, zoom=1) {
+        this.xLoc = xLoc;
+        this.yLoc = yLoc;
+        this.relativeXLoc = 0;
+        this.relativeYLoc = 0;
         this.offsetX = 0;
         this.offsetY = 0;
         this.zoom = zoom;
@@ -13,12 +13,12 @@ class viewpoint {
     }
 
     pressed() {
-        if (mouseX - this.offsetX != 0 || mouseY - this.offsetY != 0)
+        if (mouseX - this.offsetX !== 0 || mouseY - this.offsetY !== 0)
             this.clickedPossibility = false;
-        this.xloc += (mouseX - this.offsetX) / this.zoom;
-        this.yloc += (mouseY - this.offsetY) / this.zoom;
-        this.relativeXloc -= (mouseX - this.offsetX) / this.zoom;
-        this.relativeYloc += (mouseY - this.offsetY) / this.zoom;
+        this.xLoc += (mouseX - this.offsetX) / this.zoom;
+        this.yLoc += (mouseY - this.offsetY) / this.zoom;
+        this.relativeXLoc -= (mouseX - this.offsetX) / this.zoom;
+        this.relativeYLoc += (mouseY - this.offsetY) / this.zoom;
         this.offsetX = mouseX;
         this.offsetY = mouseY;
     }
@@ -28,7 +28,7 @@ class viewpoint {
         this.offsetX = 0;
         this.offsetY = 0;
         if (this.clickedPossibility)
-            clicked(mouseX - this.xloc, mouseY - this.yloc);
+            clicked(mouseX - this.xLoc, mouseY - this.yLoc);
         this.clickedPossibility = false
     }
 
@@ -48,20 +48,20 @@ class viewpoint {
         scale(this.zoom);
         translate(-width / 2, -height / 2);
 
-        translate(this.xloc, this.yloc);
+        translate(this.xLoc, this.yLoc);
     }
 
     getViewpointLoc() {
-        return createVector(this.xloc, this.yloc);
+        return createVector(this.xLoc, this.yLoc);
     }
 
     getRelativeViewpointLoc() {
-        return createVector(this.relativeXloc, this.relativeYloc);
+        return createVector(this.relativeXLoc, this.relativeYLoc);
     }
 
     getRelativeMousePosition() {
-        const mouseXRelativeToView = ((mouseX - width / 2) / this.zoom) + this.relativeXloc;
-        const mouseYRelativeToView = ((mouseY - height / 2) / this.zoom) - this.relativeYloc;
+        const mouseXRelativeToView = ((mouseX - width / 2) / this.zoom) + this.relativeXLoc;
+        const mouseYRelativeToView = ((mouseY - height / 2) / this.zoom) - this.relativeYLoc;
         return createVector(mouseXRelativeToView, mouseYRelativeToView);
     }
 

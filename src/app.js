@@ -33,8 +33,8 @@ function draw() {
 
     // Draw debug stats on topleft
     textSize(14);
-    vploc = vp.getRelativeViewpointLoc();
-    text(Math.floor(vploc.x) + ", " + Math.floor(vploc.y), 20, 30);
+    vpLoc = vp.getRelativeViewpointLoc();
+    text(Math.floor(vpLoc.x) + ", " + Math.floor(vpLoc.y), 20, 30);
 
     // Draw crosshair in middle of screen
     strokeWeight(2)
@@ -43,13 +43,13 @@ function draw() {
 }
 
 function clicked() {
-    vpmloc = vp.getRelativeMousePosition();
+    vpMouseLoc = vp.getRelativeMousePosition();
 
-    if (c1.inHitbox(vpmloc.x, vpmloc.y)) {
+    if (c1.inHitbox(vpMouseLoc.x, vpMouseLoc.y)) {
         c1.setColor(color(0, 0, 255));
     } else {
         c1.setColor(color(255, 255, 255));
-    } if (c2.inHitbox(vpmloc.x, vpmloc.y)) {
+    } if (c2.inHitbox(vpMouseLoc.x, vpMouseLoc.y)) {
         c2.setColor(color(0, 255, 0));
     } else {
         c2.setColor(color(255, 255, 255));
